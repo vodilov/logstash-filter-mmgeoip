@@ -236,7 +236,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
       event[@target] = geo_data_hash
     else
       geo_data_hash.each do |key, value|
-        event["[#{@target}][#{key}]"] = value.is_a?(Numeric) ? value : value.dup
+        event["[#{@target}][#{key}]"] = value
       end # geo_data_hash.each
     end
 
