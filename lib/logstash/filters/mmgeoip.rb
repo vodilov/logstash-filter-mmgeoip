@@ -337,7 +337,9 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "connection_type"
-          geo_data_hash["connection_type"] = response.getConnectionType().toString()
+          if !response.getConnectionType().nil?
+            geo_data_hash["connection_type"] = response.getConnectionType().toString()
+          end
         when "ip"
           geo_data_hash["ip"] = ip_address.getHostAddress()
         else
