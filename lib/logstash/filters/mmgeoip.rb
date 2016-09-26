@@ -227,11 +227,17 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
       raise e
     end
 
-    event[@target] = geo_data_hash
-
     if geo_data_hash.empty?
       tag_unsuccessful_lookup(event)
       return
+    end
+
+    if event[@target].nil?
+      event[@target] = geo_data_hash
+    else
+      geo_data_hash.each do |key, value|
+        event["[#{@target}][#{key}]"] = value.is_a?(Numeric) ? value : value.dup
+      end # geo_data_hash.each
     end
 
     filter_matched(event)
@@ -339,6 +345,8 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
         when "connection_type"
           if !response.getConnectionType().nil?
             geo_data_hash["connection_type"] = response.getConnectionType().toString()
+          else
+            geo_data_hash["connection_type"] = nil
           end
         when "ip"
           geo_data_hash["ip"] = ip_address.getHostAddress()
@@ -407,7 +415,11 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
         when "longitude"
           geo_data_hash["longitude"] = location.getLongitude()
         when "connection_type"
-          geo_data_hash["connection_type"] = traits.getConnectionType().toString()
+          if !response.getConnectionType().nil?
+            geo_data_hash["connection_type"] = response.getConnectionType().toString()
+          else
+            geo_data_hash["connection_type"] = nil
+          end
         when "domain"
           geo_data_hash["domain"] = traits.getDomain()
         when "is_anonymous_proxy"
