@@ -51,13 +51,12 @@ end
 class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
   config_name "mmgeoip"
 
-  # The path to the GeoIP2 database file which Logstash should use. Only City database is supported by now.
-  #
-  # If not specified, this will default to the GeoLiteCity database that ships
-  # with Logstash.
-  config :database, :validate => :path
+  # The path to the GeoIP2 database file which Logstash should use.
+  config :database, :validate => :path, :required => true
 
-  # database type
+  # GeoIP2 database type
+  #
+  # Default is City
   config :database_type, :validate => :string, :default => 'city'
 
   # The field containing the IP address or hostname to map via geoip. If
@@ -69,7 +68,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
   # Possible fields depend on the database type. By default, all geoip fields
   # are included in the event.
   #
-  # For the built-in GeoLiteCity database, the following are available:
+  # For the GeoIP2 LiteCity database, the following are available:
   # `city_name`, `continent_code`, `country_code2`, `country_code3`, `country_name`,
   # `dma_code`, `ip`, `latitude`, `longitude`, `postal_code`, `region_name` and `timezone`.
   config :fields, :validate => :array
@@ -140,7 +139,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           end
         when "country"
           if @fields.nil?
-            @fields = Array['continent_code', 'country_code2', 'country_code3', 'country_code', 'country_name', 'ip']
+            @fields = Array['continent_name', 'continent_code', 'country_code2', 'country_code3', 'country_code', 'country_name', 'ip']
           end
         when "anonymous_ip"
           if @fields.nil?
