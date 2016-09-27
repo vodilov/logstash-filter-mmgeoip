@@ -56,7 +56,8 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
 
   # GeoIP2 database type
   #
-  # Default is City
+  # Supported:
+  # `city` (default), `country`, `anonymous_ip`, `connection_type`, `domain`, `enterprise`, `isp`
   config :database_type, :validate => :string, :default => 'city'
 
   # The field containing the IP address or hostname to map via geoip. If
