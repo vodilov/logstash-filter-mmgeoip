@@ -258,37 +258,37 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "continent_code"
-          geo_data_hash["continent_code"] = response.getContinent().getCode()
+          geo_data_hash[field] = response.getContinent().getCode()
         when "continent_name"
-          geo_data_hash["continent_name"] = response.getContinent().getName()
+          geo_data_hash[field] = response.getContinent().getName()
         when "city_name"
-          geo_data_hash["city_name"] = response.getCity().getName()
+          geo_data_hash[field] = response.getCity().getName()
         when "country_name"
-          geo_data_hash["country_name"] = response.getCountry().getName()
+          geo_data_hash[field] = response.getCountry().getName()
         when "country_code"
-          geo_data_hash["country_code"] = response.getCountry().getIsoCode()
+          geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
-          geo_data_hash["country_code2"] = response.getRegisteredCountry().getIsoCode()
+          geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
         when "country_code3"
-          geo_data_hash["country_code3"] = response.getRepresentedCountry().getIsoCode()
+          geo_data_hash[field] = response.getRepresentedCountry().getIsoCode()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         when "postal_code"
-          geo_data_hash["postal_code"] = response.getPostal().getCode()
+          geo_data_hash[field] = response.getPostal().getCode()
         when "dma_code"
-          geo_data_hash["dma_code"] = location.getMetroCode()
+          geo_data_hash[field] = location.getMetroCode()
         when "region_name"
-          geo_data_hash["region_name"] = subdivision.getName()
+          geo_data_hash[field] = subdivision.getName()
         when "region_code"
-          geo_data_hash["region_code"] = subdivision.getIsoCode()
+          geo_data_hash[field] = subdivision.getIsoCode()
         when "timezone"
-          geo_data_hash["timezone"] = location.getTimeZone()
+          geo_data_hash[field] = location.getTimeZone()
         when "location"
-          geo_data_hash["location"] = [location.getLongitude(), location.getLatitude()]
+          geo_data_hash[field] = [location.getLongitude(), location.getLatitude()]
         when "latitude"
-          geo_data_hash["latitude"] = location.getLatitude()
+          geo_data_hash[field] = location.getLatitude()
         when "longitude"
-          geo_data_hash["longitude"] = location.getLongitude()
+          geo_data_hash[field] = location.getLongitude()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -299,19 +299,19 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "continent_code"
-          geo_data_hash["continent_code"] = response.getContinent().getCode()
+          geo_data_hash[field] = response.getContinent().getCode()
         when "continent_name"
-          geo_data_hash["continent_name"] = response.getContinent().getName()
+          geo_data_hash[field] = response.getContinent().getName()
         when "country_name"
-          geo_data_hash["country_name"] = response.getCountry().getName()
+          geo_data_hash[field] = response.getCountry().getName()
         when "country_code"
-          geo_data_hash["country_code"] = response.getCountry().getIsoCode()
+          geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
-          geo_data_hash["country_code2"] = response.getRegisteredCountry().getIsoCode()
+          geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
         when "country_code3"
-          geo_data_hash["country_code3"] = response.getRepresentedCountry().getIsoCode()
+          geo_data_hash[field] = response.getRepresentedCountry().getIsoCode()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -322,17 +322,17 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "is_anonymous"
-          geo_data_hash["is_anonymous"] = response.isAnonymous()
+          geo_data_hash[field] = response.isAnonymous()
         when "is_anonymous_vpn"
-          geo_data_hash["is_anonymous_vpn"] = response.isAnonymousVpn()
+          geo_data_hash[field] = response.isAnonymousVpn()
         when "is_hosting_provider"
-          geo_data_hash["is_hosting_provider"] = response.isHostingProvider()
+          geo_data_hash[field] = response.isHostingProvider()
         when "is_public_proxy"
-          geo_data_hash["is_public_proxy"] = response.isPublicProxy()
+          geo_data_hash[field] = response.isPublicProxy()
         when "is_tor_exit_node"
-          geo_data_hash["is_tor_exit_node"] = response.isTorExitNode()
+          geo_data_hash[field] = response.isTorExitNode()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -344,12 +344,12 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
       case field
         when "connection_type"
           if !response.getConnectionType().nil?
-            geo_data_hash["connection_type"] = response.getConnectionType().toString()
+            geo_data_hash[field] = response.getConnectionType().toString()
           else
-            geo_data_hash["connection_type"] = nil
+            geo_data_hash[field] = nil
           end
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -360,9 +360,9 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "domain"
-          geo_data_hash["domain"] = response.getDomain()
+          geo_data_hash[field] = response.getDomain()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -383,62 +383,61 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "continent_code"
-          geo_data_hash["continent_code"] = response.getContinent().getCode()
+          geo_data_hash[field] = response.getContinent().getCode()
         when "continent_name"
-          geo_data_hash["continent_name"] = response.getContinent().getName()
+          geo_data_hash[field] = response.getContinent().getName()
         when "city_name"
-          geo_data_hash["city_name"] = response.getCity().getName()
+          geo_data_hash[field] = response.getCity().getName()
         when "country_name"
-          geo_data_hash["country_name"] = response.getCountry().getName()
+          geo_data_hash[field] = response.getCountry().getName()
         when "country_code"
-          geo_data_hash["country_code"] = response.getCountry().getIsoCode()
+          geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
-          geo_data_hash["country_code2"] = response.getRegisteredCountry().getIsoCode()
+          geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
         when "country_code3"
-          geo_data_hash["country_code3"] = response.getRepresentedCountry().getIsoCode()
+          geo_data_hash[field] = response.getRepresentedCountry().getIsoCode()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         when "postal_code"
-          geo_data_hash["postal_code"] = response.getPostal().getCode()
+          geo_data_hash[field] = response.getPostal().getCode()
         when "dma_code"
-          geo_data_hash["dma_code"] = location.getMetroCode()
+          geo_data_hash[field] = location.getMetroCode()
         when "region_name"
-          geo_data_hash["region_name"] = subdivision.getName()
+          geo_data_hash[field] = subdivision.getName()
         when "region_code"
-          geo_data_hash["region_code"] = subdivision.getIsoCode()
+          geo_data_hash[field] = subdivision.getIsoCode()
         when "timezone"
-          geo_data_hash["timezone"] = location.getTimeZone()
+          geo_data_hash[field] = location.getTimeZone()
         when "location"
-          geo_data_hash["location"] = [location.getLongitude(), location.getLatitude()]
+          geo_data_hash[field] = [location.getLongitude(), location.getLatitude()]
         when "latitude"
-          geo_data_hash["latitude"] = location.getLatitude()
+          geo_data_hash[field] = location.getLatitude()
         when "longitude"
-          geo_data_hash["longitude"] = location.getLongitude()
+          geo_data_hash[field] = location.getLongitude()
         when "connection_type"
           if !response.getConnectionType().nil?
-            geo_data_hash["connection_type"] = response.getConnectionType().toString()
+            geo_data_hash[field] = response.getConnectionType().toString()
           else
-            geo_data_hash["connection_type"] = nil
+            geo_data_hash[field] = nil
           end
         when "domain"
-          geo_data_hash["domain"] = traits.getDomain()
+          geo_data_hash[field] = traits.getDomain()
         when "is_anonymous_proxy"
-          geo_data_hash["is_anonymous_proxy"] = traits.isAnonymousProxy()
+          geo_data_hash[field] = traits.isAnonymousProxy()
         when "is_legitimate_proxy"
-          geo_data_hash["is_legitimate_proxy"] = traits.isLegitimateProxy()
+          geo_data_hash[field] = traits.isLegitimateProxy()
         when "is_satellite_provider"
-          geo_data_hash["is_satellite_provider"] = traits.isSatelliteProvider()
+          geo_data_hash[field] = traits.isSatelliteProvider()
         when "isp"
-          geo_data_hash["isp"] = traits.getIsp()
+          geo_data_hash[field] = traits.getIsp()
         when "organization"
-          geo_data_hash["organization"] = traits.getOrganization()
+          geo_data_hash[field] = traits.getOrganization()
         when "user_type"
-          geo_data_hash["user_type"] = traits.getUserType()
+          geo_data_hash[field] = traits.getUserType()
         when "autonomous_system_number"
-          geo_data_hash["autonomous_system_number"] = traits.getAutonomousSystemNumber()
+          geo_data_hash[field] = traits.getAutonomousSystemNumber()
         when "autonomous_system_organization"
-          geo_data_hash["autonomous_system_organization"] = traits.getAutonomousSystemOrganization()
-
+          geo_data_hash[field] = traits.getAutonomousSystemOrganization()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
@@ -449,15 +448,15 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
     @fields.each do |field|
       case field
         when "isp"
-          geo_data_hash["isp"] = response.getIsp()
+          geo_data_hash[field] = response.getIsp()
         when "organization"
-          geo_data_hash["organization"] = response.getOrganization()
+          geo_data_hash[field] = response.getOrganization()
         when "autonomous_system_number"
-          geo_data_hash["autonomous_system_number"] = response.getAutonomousSystemNumber()
+          geo_data_hash[field] = response.getAutonomousSystemNumber()
         when "autonomous_system_organization"
-          geo_data_hash["autonomous_system_organization"] = response.getAutonomousSystemOrganization()
+          geo_data_hash[field] = response.getAutonomousSystemOrganization()
         when "ip"
-          geo_data_hash["ip"] = ip_address.getHostAddress()
+          geo_data_hash[field] = ip_address.getHostAddress()
         else
           raise Exception.new("[#{field}] is not a supported field option.")
       end
