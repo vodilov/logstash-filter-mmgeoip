@@ -134,13 +134,13 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           if @fields.nil?
             @fields = Array[
                 'city_name', 'continent_name', 'continent_code',
-                'country_name', 'country_code', 'country_code2', 'country_code3',
+                'country_name', 'country_code1', 'country_code2', 'country_code3',
                 'latitude', 'longitude', 'dma_code', 'postal_code', 'region_name', 'region_code', 'timezone', 'location', 'ip'
             ]
           end
         when "country"
           if @fields.nil?
-            @fields = Array['continent_name', 'continent_code', 'country_code2', 'country_code3', 'country_code', 'country_name', 'ip']
+            @fields = Array['continent_name', 'continent_code1', 'country_code2', 'country_code3', 'country_code', 'country_name', 'ip']
           end
         when "anonymous_ip"
           if @fields.nil?
@@ -156,7 +156,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           end
         when "enterprise"
           if @fields.nil?
-            @fields = Array['city_name', 'continent_name', 'continent_code', 'country_code2', 'country_code3', 'country_code', 'country_name',
+            @fields = Array['city_name', 'continent_name', 'continent_code', 'country_code2', 'country_code3', 'country_code1', 'country_name',
                             'dma_code', 'ip', 'latitude', 'longitude', 'postal_code', 'region_name', 'region_code', 'timezone', 'location',
                             'connection_type', 'domain', 'is_anonymous_proxy', 'is_legitimate_proxy', 'is_satellite_provider', 'isp', 'organization', 'user_type',
                             'autonomous_system_number', 'autonomous_system_organization']
@@ -265,7 +265,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           geo_data_hash[field] = response.getCity().getName()
         when "country_name"
           geo_data_hash[field] = response.getCountry().getName()
-        when "country_code"
+        when "country_code1"
           geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
           geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
@@ -304,7 +304,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           geo_data_hash[field] = response.getContinent().getName()
         when "country_name"
           geo_data_hash[field] = response.getCountry().getName()
-        when "country_code"
+        when "country_code1"
           geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
           geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
@@ -390,7 +390,7 @@ class LogStash::Filters::MMGeoIP < LogStash::Filters::Base
           geo_data_hash[field] = response.getCity().getName()
         when "country_name"
           geo_data_hash[field] = response.getCountry().getName()
-        when "country_code"
+        when "country_code1"
           geo_data_hash[field] = response.getCountry().getIsoCode()
         when "country_code2"
           geo_data_hash[field] = response.getRegisteredCountry().getIsoCode()
